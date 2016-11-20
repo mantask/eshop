@@ -1,0 +1,5 @@
+#!/bin/bash
+#
+# Starts Docker'ized development environment.
+
+docker-compose --project-name helis stop

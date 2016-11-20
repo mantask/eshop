@@ -1,0 +1,104 @@
+{% extends '@App/layout.html.twig' %}
+
+
+{% block body %}
+
+    <div class="page-header">
+
+        {# Category filter #}
+        <div class="btn-group pull-right">
+
+            <a href="{{ path('products_index') }}" class="btn btn-default">
+                {{- 'app.product.index.allCategoriesLnk'|trans -}}
+            </a>
+
+            {% for category in categories %}
+                <a href="{{ path('products_index', { categoryId: category.id }) }}" class="btn btn-default">
+                    {{- category.title -}}
+                </a>
+            {% endfor %}
+
+        </div>
+
+        <h1>{{ 'app.product.index.head'|trans }}</h1>
+    </div>
+
+
+    {# Product list #}
+
+    {% if products is empty %}
+
+        <div class="well text-center text-muted">{{ 'app.common.empty_list'|trans }}</div>
+
+    {% else %}
+
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>{{ knp_pagination_sortable(products, 'app.product.entity.name'|trans, 'product.title') }}</th>
+                    <th>{{ 'app.product.entity.category'|trans }}</th>
+                    <th>{{ knp_pagination_sortable(products, 'app.product.entity.createdOn'|trans, 'product.createdOn') }}</th>
+                    <th>{{ knp_pagination_sortable(products, 'app.product.entity.price'|trans, 'product.price') }}</th>
+                    {% if app.user %}
+                        <th></th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                    <tr>
+                        <td>
+                            <a href="{{ path('products_view', { id: product.id }) }}" class="product">
+                                <img src="{{ asset(uploads_dir ~ product.photo) }}" height="65" />
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{{ path('products_view', { id: product.id }) }}" class="product">
+                                <strong>{{ product.title }}</strong>
+                            </a>
+                            <br/>
+                            <small>{{ product.description }}</small>
+                        </td>
+                        <td>
+                            {% for category in product.categories %}
+                                <span class="label label-default">{{ category.title }}</span>
+                            {% endfor %}
+                        </td>
+                        <td><small>{{ product.createdOn|date("Y-m-d H:i:s") }}</small></td>
+                        <td>{{ product.price|number_format(2) }} EUR</td>
+                        {% if app.user %}
+                            <td>
+                                <a href="{{ path('orders_add', { productId: product.id }) }}" class="btn btn-default postback">
+                                    {{- 'app.product.index.buyBtn'|trans -}}
+                                </a>
+                            </td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {{ knp_pagination_render(products) }}
+
+    {% endif %}
+
+{% endblock %}
+
+
+{% block javascripts %}
+    <script>
+        $(function () {
+
+            $('.product').click(function (e) {
+                var url = $(this).attr('href');
+                $('#modal').load(url, function () {
+                    $('#modal .modal').modal();
+                });
+                e.preventDefault();
+            });
+
+        });
+    </script>
+{% endblock %}

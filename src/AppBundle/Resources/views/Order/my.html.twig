@@ -1,0 +1,40 @@
+{% extends '@App/layout.html.twig' %}
+
+{% block body %}
+
+    <div class="page-header">
+        <h1>{{ 'app.order.my.head'|trans }}</h1>
+    </div>
+
+    {% if orderItems is empty %}
+
+        <div class="well text-center text-muted">{{ 'app.common.empty_list'|trans }}</div>
+
+    {% else %}
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>{{ 'app.order.entity.id'|trans }}</th>
+                    <th>{{ 'app.product.entity.buyer'|trans }}</th>
+                    <th>{{ 'app.product.entity.name'|trans }}</th>
+                    <th>{{ 'app.product.entity.price'|trans }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for orderItem in orderItems %}
+                    <tr>
+                        <td>{{ orderItem.order.id }}</td>
+                        <td>{{ orderItem.order.user.username }}</td>
+                        <td>{{ orderItem.product.title }}</td>
+                        <td>{{ orderItem.price|number_format(2) }} EUR</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {{ knp_pagination_render(orderItems) }}
+
+    {% endif %}
+
+{% endblock %}

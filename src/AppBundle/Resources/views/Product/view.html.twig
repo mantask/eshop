@@ -1,0 +1,62 @@
+<div class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal" >&times;</button>
+                <h4 class="modal-title">{{ 'app.product.view.head'|trans }}</h4>
+
+            </div>
+            <div class="modal-body">
+
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th>{{ 'app.product.entity.image'|trans }}</th>
+                            <td>
+                                <a href="{{ asset(uploads_dir ~ product.photo) }}" target="_photo">
+                                    <img src="{{ asset(uploads_dir ~ product.photo) }}" height="200" />
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>{{ 'app.product.entity.name'|trans }}</th>
+                            <td>{{ product.title }}</td>
+                        </tr>
+                        <tr>
+                            <th>{{ 'app.product.entity.description'|trans }}</th>
+                            <td>{{ product.description }}</td>
+                        </tr>
+                        <tr>
+                            <th>{{ 'app.product.entity.category'|trans }}</th>
+                            <td>
+                                {% for category in product.categories %}
+                                    <span class="label label-default">{{ category.title }}</span>
+                                {% endfor %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>{{ 'app.product.entity.createdOn'|trans }}</th>
+                            <td>{{ product.createdOn|date('Y-m-d H:i:s') }}</td>
+                        </tr>
+                        <tr>
+                            <th>{{ 'app.product.entity.price'|trans }}</th>
+                            <td>{{ product.price|number_format(2) }} EUR</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            {% if app.user %}
+                <div class="modal-footer">
+
+                    <a href="{{ path('orders_add', { productId: product.id }) }}"
+                       class="btn btn-block btn-primary postback">
+                        {{- 'app.product.view.buyBtn'|trans -}}
+                    </a>
+
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>

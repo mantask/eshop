@@ -1,0 +1,58 @@
+app:
+
+  common:
+    choose: - Pasirinkite -
+    prev: Atgal
+    next: Pirmyn
+    submitBtn: Išsaugoti
+    cancelBtn: Atšaukti
+    flashes:
+      success: Duomenys atnaujinti sėkmingai.
+      error: Nepavyko atnaujinti duomenų! Prašome pabandyti dar kartą.
+    empty_list: ~ Sąrašas tuščias ~
+
+  layout:
+    brand: SeoHelis
+    login: Prisijungti
+    signup: Registruotis
+    logout: Atsijungti
+    createProduct: Naujas produktas
+    checkout: Krepšelis
+    itemRequests: Užsakymai
+
+  product:
+
+    entity:
+      name: Pavadinimas
+      description: Aprašymas
+      category: Kategorija
+      createdOn: Sukurtas
+      price: Kaina
+      image: Paveiksliukas
+      buyer: Pirkėjas
+
+    index:
+      head: Produktų katalogas
+      buyBtn: Pirkti
+      allCategoriesLnk: Viskas
+
+    view:
+      head: Produkto informacija
+      buyBtn: Pirkti
+
+    create:
+      head: Naujas produktas
+
+  order:
+
+    entity:
+      id: Užsakymo nr.
+
+    my:
+      head: Užsakymai
+
+    checkout:
+      head: Krepšelis
+      total: Iš viso
+      submitBtn: Patvirtinti užsakymą
+      backBtn: Grįžti į produktų sąrašą

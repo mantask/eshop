@@ -1,0 +1,10 @@
+#!/bin/bash
+#
+# Cleare cache for dev and test.
+
+docker exec helis_php_1 rm var/cache/de* -rf
+docker exec helis_php_1 rm var/cache/tes* -rf
+docker exec helis_php_1 rm var/cache/pro* -rf
+docker exec helis_php_1 php -r 'opcache_reset();'
+chown www-data:www-data var -R
+chown www-data:www-data web/uploads -R

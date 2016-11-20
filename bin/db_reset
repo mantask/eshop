@@ -1,0 +1,10 @@
+#!/bin/bash
+#
+# Populate database with schema and data.
+
+docker exec helis_php_1 bin/console doctrine:database:drop --force
+docker exec helis_php_1 bin/console doctrine:database:create
+docker exec helis_php_1 bin/console doctrine:schema:create
+docker exec helis_php_1 bin/console doctrine:fixtures:load
+docker exec helis_php_1 rm -rf /var/www/web/uploads/*
+

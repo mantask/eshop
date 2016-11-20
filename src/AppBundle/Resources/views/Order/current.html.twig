@@ -1,0 +1,67 @@
+{% extends '@App/layout.html.twig' %}
+
+{% block body %}
+
+    <div class="page-header">
+        <h1>{{ 'app.order.checkout.head'|trans }}</h1>
+    </div>
+
+    {% if order.items is empty %}
+        
+        <div class="well text-center text-muted">{{ 'app.common.empty_list'|trans }}</div>
+        
+    {% else %}
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>{{ 'app.product.entity.name'|trans }}</th>
+                    <th>{{ 'app.product.entity.category'|trans }}</th>
+                    <th>{{ 'app.product.entity.price'|trans }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for orderItem in order.items %}
+                    <tr>
+                        <td>
+                            <img src="{{ asset(uploads_dir ~ orderItem.product.photo) }}" height="65" />
+                        </td>
+                        <td>
+                            <strong>{{ orderItem.product.title }}</strong>
+                            <br/>
+                            <small>{{ orderItem.product.description }}</small>
+                        </td>
+                        <td>
+                            {% for category in orderItem.product.categories %}
+                                <span class="label label-default">{{ category.title }}</span>
+                            {% endfor %}
+                        </td>
+                        <td>{{ orderItem.price|number_format(2) }} EUR</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th colspan="3" class="text-right">{{ 'app.order.checkout.total'|trans }}:</th>
+                    <th>{{ order.totalPrice|number_format(2) }} EUR</th>
+                </tr>
+            </tfoot>
+        </table>
+
+        <p>
+            {% if order.canSubmit %}
+                <a class="btn btn-primary postback" href="{{ path('orders_submit') }}">
+                    {{- 'app.order.checkout.submitBtn'|trans -}}
+                </a>
+            {% endif %}
+    
+            <a href="{{ path('products_index') }}" class="btn btn-link">
+                {{- 'app.order.checkout.backBtn'|trans -}}
+            </a>
+        </p>
+
+    {% endif %}
+
+
+{% endblock %}

@@ -1,0 +1,37 @@
+version: '2'
+
+services:
+
+  # https://github.com/docker-library/postgres/blob/master/9.5/Dockerfile
+  postgres:
+    image: postgres:9.5
+    ports:
+      - ${HELIS_HOST_POSTGRES_PORT}:5432
+    environment:
+      POSTGRES_DB: helis
+      POSTGRES_USER: helis
+      POSTGRES_PASSWORD: helis
+
+  # https://hub.docker.com/r/again/php7.0-fpm/~/dockerfile/
+  php:
+    image: again/php7.0-fpm
+    environment:
+      PHP_IDE_CONFIG: "serverName=Helis"
+      PHP_XDEBUG_ENABLED: 1 # Set 1 to enable
+      XDEBUG_CONFIG: "remote_host=${HELIS_HOST_EXTERNAL_IP}"
+    links:
+      - postgres
+    volumes:
+      - .:/var/www/:rw
+
+  # https://github.com/nginxinc/docker-nginx/blob/master/stable/jessie/Dockerfile
+  nginx:
+    image: nginx
+    ports:
+      - ${HELIS_HOST_NGINX_PORT}:80
+    links:
+      - php
+    volumes_from:
+      - php
+    volumes:
+      - ./etc/vhost.conf:/etc/nginx/conf.d/default.conf:ro

@@ -1,0 +1,6 @@
+#!/bin/bash
+#
+# Starts Docker'ized development environment.
+
+export HELIS_HOST_EXTERNAL_IP=$(hostname -I | awk '{print $1}')
+docker-compose --project-name helis up -d

@@ -1,0 +1,25 @@
+{% extends '@App/layout.html.twig' %}
+
+
+{% block body %}
+
+    <div class="page-header">
+        <h1>{{ 'app.product.create.head'|trans }}</h1>
+    </div>
+
+    {{ form_start(form) }}
+
+        {{ form_row(form.photo) }}
+        {{ form_row(form.title) }}
+        {{ form_row(form.description) }}
+        {{ form_row(form.categories) }}
+        {{ form_row(form.price) }}
+
+        <p>
+            <button class="btn btn-primary" type="submit">{{ 'app.common.submitBtn'|trans }}</button>
+            <a href="{{ path('products_index') }}" class="btn btn-link">{{ 'app.common.cancelBtn'|trans }}</a>
+        </p>
+
+    {{ form_end(form) }}
+
+{% endblock %}

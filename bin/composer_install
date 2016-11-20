@@ -1,0 +1,5 @@
+#!/bin/bash
+#
+# Install composer dependencies.
+
+docker exec helis_php_1 composer install
