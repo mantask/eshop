@@ -7,7 +7,7 @@ use Doctrine\ORM\EntityRepository;
 
 class OrderItemRepository extends EntityRepository
 {
-    public function queryOrderedFromUser(User $user)
+    public function queryOrderedByUser(User $user)
     {
         return $this->createQueryBuilder('orderItem')
             ->innerJoin('orderItem.order', 'ordr')

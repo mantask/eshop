@@ -19,12 +19,7 @@ class ProductService
     use UserAwareTrait;
 
     /**
-     * Find a list of products by category.
-     *
-     * @param int|null $productCategoryId
-     * @param int $page (optional)
-     *
-     * @return PaginationInterface
+     * @inheritdoc
      */
     public function findAll($productCategoryId, $page = 1)
     {
@@ -36,9 +31,7 @@ class ProductService
     }
 
     /**
-     * Return a list of all categories.
-     *
-     * @return ArrayCollection
+     * @inheritdoc
      */
     public function findAllCategories()
     {
@@ -48,11 +41,7 @@ class ProductService
     }
 
     /**
-     * Create new product by current user.
-     *
-     * @param Product $product
-     *
-     * @return void
+     * @inheritdoc
      */
     function save(Product $product)
     {

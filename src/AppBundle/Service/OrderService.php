@@ -13,16 +13,14 @@ use JMS\DiExtraBundle\Annotation as DI;
 /**
  * @DI\Service("app.order_service")
  */
-class OrderService
+class OrderService implements OrderServiceInterface
 {
     use EntityManagerAwareTrait;
     use PaginatorAwareTrait;
     use UserAwareTrait;
 
     /**
-     * Find current order by active user.
-     *
-     * @return Order
+     * @inheritdoc
      */
     public function current()
     {
@@ -44,11 +42,7 @@ class OrderService
     }
 
     /**
-     * Add product to current order by active user.
-     *
-     * @param Product $product
-     *
-     * @return void
+     * @inheritdoc
      */
     public function addProduct(Product $product)
     {
@@ -59,9 +53,7 @@ class OrderService
     }
 
     /**
-     * Submit current order by active user.
-     *
-     * @return void
+     * @inheritdoc
      */
     public function submit()
     {
@@ -72,11 +64,7 @@ class OrderService
     }
 
     /**
-     * Return a list of order items that have been submitted on products by active user.
-     *
-     * @param int $page (optional)
-     *
-     * @return PaginationInterface
+     * @inheritdoc
      */
     public function my($page = 1)
     {
@@ -84,7 +72,7 @@ class OrderService
 
         $qb = $this->entityManager
             ->getRepository(OrderItem::class)
-            ->queryOrderedFromUser($user);
+            ->queryOrderedByUser($user);
 
         return $this->paginator->paginate($qb, $page);
     }
