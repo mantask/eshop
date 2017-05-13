@@ -34,4 +34,4 @@ services:
     volumes_from:
       - php
     volumes:
-      - ./etc/vhost.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./app/docker/vhost.conf:/etc/nginx/conf.d/default.conf:ro

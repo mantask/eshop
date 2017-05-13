@@ -6,6 +6,7 @@
     <div class="page-header">
 
         {# Category filter #}
+
         <div class="btn-group pull-right">
 
             <a href="{{ path('products_index') }}" class="btn btn-default">
@@ -69,7 +70,7 @@
                         <td><small>{{ product.createdOn|date("Y-m-d H:i:s") }}</small></td>
                         <td>{{ product.price|number_format(2) }} EUR</td>
                         {% if app.user %}
-                            <td>
+                            <td class="text-right">
                                 <a href="{{ path('orders_add', { productId: product.id }) }}" class="btn btn-default postback">
                                     {{- 'app.product.index.buyBtn'|trans -}}
                                 </a>
