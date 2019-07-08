@@ -1,8 +1,6 @@
 Simple eShop
 ============
 
-[SeoHelis: Task 3 - Simple eShop](https://bitbucket.org/Sauls/seohelis-devdocs/wiki/new-team-member/backend/task3.md) by SeoHelis.
-
 Summary
 -------
 
